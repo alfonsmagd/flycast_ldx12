@@ -1,5 +1,8 @@
 # Flycast
 
+This fork adds the Ldx12 build dependency for Visual Studio 2022 x64.
+See [the setup instructions](docs/ldx12-vs2022.md). No Direct3D 12 renderer is implemented yet.
+
 [![Android CI](https://github.com/flyinghead/flycast/actions/workflows/android.yml/badge.svg)](https://github.com/flyinghead/flycast/actions/workflows/android.yml)
 [![C/C++ CI](https://github.com/flyinghead/flycast/actions/workflows/c-cpp.yml/badge.svg)](https://github.com/flyinghead/flycast/actions/workflows/c-cpp.yml)
 [![Nintendo Switch CI](https://github.com/flyinghead/flycast/actions/workflows/switch.yml/badge.svg)](https://github.com/flyinghead/flycast/actions/workflows/switch.yml)

@@ -66,6 +66,8 @@ if(NOT DEFINED ARCHITECTURE)
 endif()
 message(STATUS "Target architecture: ${ARCHITECTURE}")
 
+include(Ldx12 NO_POLICY_SCOPE)
+
 if(CMAKE_CXX_COMPILER MATCHES "webos" OR
    CMAKE_CXX_COMPILER MATCHES "starfish")
 	set(WEBOS ON)
@@ -279,6 +281,8 @@ elseif(APPLE)
 else()
 	add_executable(${PROJECT_NAME} core/emulator.cpp)
 endif()
+
+flycast_add_ldx12(${PROJECT_NAME})
 
 set_target_properties(${PROJECT_NAME} PROPERTIES
 		CMAKE_CXX_STANDARD 20

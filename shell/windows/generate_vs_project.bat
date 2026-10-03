@@ -36,7 +36,12 @@ if not defined CMAKE_EXE (
     goto :fail
 )
 
-if not exist "core\deps\glslang\CMakeLists.txt" (
+if not exist "core\deps\glslang\CMakeLists.txt" goto :missing_submodules
+if not exist "core\deps\LightDX12\CMakeLists.txt" goto :missing_submodules
+goto :generate_project
+
+:missing_submodules
+(
     echo Git submodules are missing.
     call :find_git
     if not defined GIT_EXE (
@@ -66,9 +71,10 @@ if not exist "core\deps\glslang\CMakeLists.txt" (
     )
 )
 
+:generate_project
 echo.
 echo Generating Visual Studio 2022 x64 project...
-"%CMAKE_EXE%" -B build -G "Visual Studio 17 2022" -A x64 -DUSE_DX9=OFF
+"%CMAKE_EXE%" -B build -G "Visual Studio 17 2022" -A x64 -DUSE_DX9=OFF -DFLYCAST_ENABLE_LDX12=ON
 if errorlevel 1 goto :fail
 
 call :say_success "Visual Studio project generated."
@@ -160,10 +166,10 @@ if errorlevel 1 exit /b 1
 
 "!GIT_EXE!" remote get-url origin >nul 2>&1
 if errorlevel 1 (
-    "!GIT_EXE!" remote add origin https://github.com/flyinghead/flycast.git
+    "!GIT_EXE!" remote add origin https://github.com/alfonsmagd/flycast_ldx12.git
     if errorlevel 1 exit /b 1
 ) else (
-    "!GIT_EXE!" remote set-url origin https://github.com/flyinghead/flycast.git
+    "!GIT_EXE!" remote set-url origin https://github.com/alfonsmagd/flycast_ldx12.git
     if errorlevel 1 exit /b 1
 )
 
