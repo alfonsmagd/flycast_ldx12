@@ -26,12 +26,27 @@
 #include "gl_context.h"
 #include "rend/dx9/dxcontext.h"
 #include "rend/dx11/dx11context.h"
+#ifdef USE_LDX12
+#include "rend/ldx12/ldx12context.h"
+#include <cstdlib>
+#endif
 #ifdef USE_VULKAN
 #include "rend/vulkan/vulkan_context.h"
 #endif
 
 void initRenderApi(void *window, void *display)
 {
+#ifdef USE_LDX12
+	static bool ldx12TestDone = false;
+	const char *ldx12InitTest = std::getenv("FLYCAST_LDX12_INIT_TEST");
+	if (!ldx12TestDone)
+	{
+		ldx12TestDone = true;
+		LDX12Context::Create(window, display);
+		NOTICE_LOG(RENDERER, "LDX12 init test: device and swapchain created successfully");
+		GraphicsContext::Term();
+	}
+#endif
 #ifdef USE_VULKAN
 	if (isVulkan(config::RendererType))
 	{

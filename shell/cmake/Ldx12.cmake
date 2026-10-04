@@ -39,5 +39,6 @@ function(flycast_add_ldx12 target)
 	# or C++20 requirement on existing Flycast sources. Future Ldx12 consumers
 	# must compile as C++20; the Ldx12 library itself already does so.
 	target_link_libraries(${target} PRIVATE "$<LINK_ONLY:Ldx12::Ldx12>")
+	target_compile_definitions(${target} PRIVATE USE_LDX12)
 	target_include_directories(${target} PRIVATE "$<TARGET_PROPERTY:Ldx12,INTERFACE_INCLUDE_DIRECTORIES>")
 endfunction()

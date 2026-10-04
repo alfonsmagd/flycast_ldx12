@@ -36,3 +36,7 @@ endif()
 if(WIN32 AND USE_DX11)
     add_subdirectory(dx11)
 endif()
+
+if(FLYCAST_ENABLE_LDX12)
+    add_subdirectory(ldx12)
+endif()
